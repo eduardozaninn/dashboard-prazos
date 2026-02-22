@@ -15,11 +15,12 @@ import {
 export default function Dashboard() {
   const [prazos, setPrazos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/prazos');
+        const response = await fetch(`${API_URL}/api/prazos`);
         const data = await response.json();
         setPrazos(data);
       } catch (error) {
@@ -33,7 +34,7 @@ export default function Dashboard() {
 
   const concluirTarefa = async (id: number) => {
     try {
-      await fetch(`http://localhost:5000/api/concluir/${id}`, { method: 'POST' });
+      await fetch(`${API_URL}/api/concluir/${id}`, { method: 'POST' });
       setPrazos(prazos.map(p => p.id === id ? { ...p, status_atividade: 'concluido' } : p));
     } catch (error) {
       alert("Erro ao atualizar tarefa");

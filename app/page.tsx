@@ -34,7 +34,7 @@ export default function Dashboard() {
 
   const concluirTarefa = async (id: number) => {
     try {
-      await fetch(`${API_URL}api/concluir/${id}`, { method: 'POST' });
+      await fetch(`${API_URL}/api/concluir/${id}`, { method: 'POST' });
       setPrazos(prazos.map(p => p.id === id ? { ...p, status_atividade: 'concluido' } : p));
     } catch (error) {
       alert("Erro ao atualizar tarefa");
